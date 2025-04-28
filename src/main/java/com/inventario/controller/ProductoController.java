@@ -55,7 +55,15 @@ public class ProductoController {
         }
         return ResponseEntity.ok(productoService.obtenerTodosProductos());
     }
-    
+
+    @GetMapping("/buscarSku")
+    public ResponseEntity<List<Producto>> buscarProductosPorCodigoSku(@RequestParam(required = false) String codigoSku) {
+        if (codigoSku != null && !codigoSku.isEmpty()) {
+            return ResponseEntity.ok(productoService.buscarProductoPorCodigoSku(codigoSku));
+        }
+        return ResponseEntity.ok(productoService.obtenerTodosProductos());
+    }
+
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
         // Verificar si la categoría existe
